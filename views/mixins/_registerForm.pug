@@ -1,0 +1,16 @@
+mixin registerForm()
+    -const bodyName = body ? body.name : ''
+    -const bodyEmail = body ? body.email : ''
+    -const bodyPassword = body ? body.password : ''
+    -const bodyConfirm = body ? body.confirm-password : ''
+    form.form(action="/register" method="POST")
+        h2 Register 
+        label(for="name") name
+        input(type="text" name="name" required value=bodyName)
+        label(for="email") email
+        input(type="email" name="email" required value=bodyEmail)
+        label(for="password") Password
+        input(type="password" name="password" value=bodyPassword)
+        label(for="confirm-password") Confirm Password
+        input(type="password" name="confirm-password" value=bodyConfirm)
+        input.button(type="submit" value="Register")

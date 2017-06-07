@@ -1,0 +1,32 @@
+// data and libraries used in every template are stored in the helpers.js file
+    there are several properties exported from helpers.js, one is the basis for the nav menu:
+    exports.menu = [
+        { slug: '/stores', title: 'Stores', icon: 'store', },
+        { slug: '/tags', title: 'Tags', icon: 'tag', },
+        { slug: '/top', title: 'Top', icon: 'top', },
+        { slug: '/add', title: 'Add', icon: 'add', },
+        { slug: '/map', title: 'Map', icon: 'map', },
+    ];
+
+// in app.js we set the exports of helpers.js equal to the object h, consumable as such in our views:
+    app.use((req, res, next) => {
+        res.locals.h = helpers;
+        res.locals.flashes = req.flash();
+        res.locals.user = req.user || null;
+        res.locals.currentPath = req.path;
+        next();
+    });
+
+    this is a bit of middle where that defines these variables in the locals property of every response 
+        notice that h contains variables of multiple types, but also whole libraries, like the node module 'moment.js'
+
+// template looping looks like
+
+each item in h.menu
+    // contents of each item in here
+    // we can also have statements like:
+    a.nav__link(href=item.slug, class=(currentPath.startsWith(item.slug) ? 'nav__link--active' : ''))
+    // here we can see we give the anchor element an active class if the currentPath starts with the slug for this item
+    // currentPath is defined in the same app.use() as h
+
+

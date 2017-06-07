@@ -1,0 +1,60 @@
+body
+    // in pug <p>Hello!</p> looks like:
+    p Hello!
+    // pug is sensitive to indentations, if we want a <p> nested in a div
+        then we:
+    div
+        p nested p tag here
+        span span here nested in the same div
+    // and what if we want classes or id's, well that looks a lot like css:
+
+    div.divWithClass
+        h1#h1WithId I'm an h1 with a rediculous id
+        h2.randomClass.secondClass h2 with two classes
+
+    // if you leave out a tag name, it will be assumed to be a div:
+    .assumedDiv
+        p another p inside a div
+        // we can also add attributes that aren't class or id:
+        img(src="somfolder/somefile.png" alt="someimage")
+    
+    // we can also use pipes to indicate nested content 
+    //so:
+
+    h1 Hello
+        span how are you
+    // is the same as:
+
+    h1
+        | Hello
+        span how are you
+
+    // interpolation:
+
+    // if for our render call we have:
+    // router.get('/', (req, res, next) => {
+        res.render('helloTemplate', { 
+                name: 'case' ,
+                title: 'joeBoy',
+                liveLong: false
+            });
+        });
+    
+    // then we can interpolate like:
+
+    p hello #{name}
+
+    // if we want to pass a var into an attribut, we have to use the JS template string syntax:
+
+    img(alt=`name is ${name}`)
+
+    // we can also use js to create vars inside pug:
+    // we preface with a '-'
+    - const randomText = "some Text";
+    - const upperName = name.toUpperCase();
+
+    p #{randomText} for #{upperName}
+    
+    // and we can use js in our interpolation brackets
+
+    p my uppercase name is #{name.toUpperCase()}
